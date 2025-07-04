@@ -4,6 +4,7 @@ import 'dotenv/config'; // simple way: auto loads .env
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -13,6 +14,8 @@ async function bootstrap() {
   app.setViewEngine('ejs');
 
   const config = app.get(ConfigService);
+
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(config.get<string>('PORT') ?? 8080);
 }

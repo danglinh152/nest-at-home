@@ -18,7 +18,5 @@ export class AppController {
   @Render('home')
   getHelloMVC() {
     console.log('check port: >>> ', this.configService.get<string>('PORT'));
-
-    // return this.appService.getHello();
   }
 }
